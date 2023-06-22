@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ProductModule } from './product/product.module';
 import { AdminModule } from './admin/admin.module';
 import { DataBaseSourceConfig } from './config/db.source';
+import { InventaryModule } from './inventary/inventary.module';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { DataBaseSourceConfig } from './config/db.source';
       load: [],
     }),
     TypeOrmModule.forRoot(DataBaseSourceConfig),
-    ProductModule,
+    InventaryModule,
     AdminModule,
   ],
   controllers: [],
