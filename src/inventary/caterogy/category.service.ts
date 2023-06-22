@@ -84,4 +84,10 @@ export class CaterogyService {
       this.errorLog.LogError(error);
     }
   }
+
+  async deleteCategory(id: number) {
+    const product = await this.findCategory(id);
+    await this.categoryRepository.delete(product);
+    return true;
+  }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -38,5 +39,10 @@ export class CaterogyController {
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
     return this.caterogyService.updateCategory(id, updateCategoryDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.caterogyService.deleteCategory(id);
   }
 }

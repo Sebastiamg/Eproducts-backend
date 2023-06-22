@@ -26,3 +26,16 @@ docker compose --env-file .dev.env up -d
 npm run dev
 ```
 
+
+# Endpoints
+## Base: ``` http://localhost:3000/api/v1/ ```
+### Productos: ``` http://localhost:3000/api/v1/products/ ```
+### Categorías: ``` http://localhost:3000/api/v1/categories/ ```
+
+<br/>
+
+## Metodo usados
+### Obtener - ``` GET```
+### Crear - ``` POST```
+### Editar - ``` PATCH```
+### Eliminar - ``` DELETE```
