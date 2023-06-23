@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { MiOrModule } from './product.module';
 
 import { Product, PaginationDto, ProductDto } from '../';
 import { HandleError } from 'src/common/handleError';
@@ -10,6 +11,8 @@ import { CaterogyService } from '../caterogy/category.service';
 @Injectable()
 export class ProductService {
   private errorLog = new HandleError();
+  private mior: MiOrModule = MiOrModule;
+
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
@@ -26,7 +29,7 @@ export class ProductService {
     });
 
     try {
-      await this.productRepository.save(product);
+      this.mior && (await this.productRepository.save(product));
       return product;
     } catch (error) {
       return this.errorLog.LogError(error);
