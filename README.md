@@ -35,7 +35,7 @@ npm run dev
 <br/>
 
 ## Metodo usados
-### Obtener - ``` GET```
-### Crear - ``` POST```
-### Editar - ``` PATCH```
-### Eliminar - ``` DELETE```
+### Obtener - ``` GET ```
+### Crear - ``` POST ```
+### Editar - ``` PATCH ```
+### Eliminar - ``` DELETE ```
