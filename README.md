@@ -29,8 +29,8 @@ npm run dev
 
 # Endpoints
 ## Base: ``` http://localhost:3000/api/v1/ ```
-### Productos: ``` http://localhost:3000/api/v1/products/ ```
-### Categorías: ``` http://localhost:3000/api/v1/categories/ ```
+### Productos: ``` http://localhost:3000/api/v1/product/ ```
+### Categorías: ``` http://localhost:3000/api/v1/category/ ```
 
 <br/>
 
