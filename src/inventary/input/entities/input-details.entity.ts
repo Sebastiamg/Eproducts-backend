@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Product } from '../../product/entities/product.entity';
 import { Input } from './input.entity';
 
@@ -10,12 +16,18 @@ export class InputDetails {
   @Column()
   incoming_quantity: number;
 
-  //Relations
-  //Input
-  @ManyToOne(() => Input, (input) => input.input_details)
+  // Relations
+  // Input
+  @ManyToOne(() => Input, (input) => input.input_details, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'id_input' })
   input: Input;
 
-  //Product
-  @ManyToOne(() => Product, (product) => product.inputDetails)
+  // Product
+  @ManyToOne(() => Product, (product) => product.input_details, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'id_prduct' })
   product: Product;
 }

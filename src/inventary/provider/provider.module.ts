@@ -9,5 +9,6 @@ import { Provider } from '../';
   controllers: [ProviderController],
   providers: [ProviderService],
   imports: [TypeOrmModule.forFeature([Provider])],
+  exports: [ProviderService],
 })
 export class ProviderModule {}

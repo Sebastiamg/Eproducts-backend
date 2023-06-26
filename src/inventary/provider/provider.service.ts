@@ -1,24 +1,76 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Provider, ProviderDto, UpdateProviderDto } from '../';
+import { HandleError } from 'src/common/handleError';
 
 @Injectable()
 export class ProviderService {
-  create(createProviderDto: any) {
-    return 'This action adds a new provider';
+  private readonly handleError = new HandleError();
+
+  constructor(
+    @InjectRepository(Provider)
+    private readonly providerRepository: Repository<Provider>,
+  ) {}
+
+  // create provider
+  async createProvider(createProviderDto: ProviderDto) {
+    const provider = this.providerRepository.create(createProviderDto);
+
+    try {
+      await this.providerRepository.save(provider);
+      return provider;
+    } catch (error) {
+      this.handleError.LogError(error);
+    }
+
+    return provider;
   }
 
-  findAll() {
-    return `This action returns all provider`;
+  // find all users
+  async findAllProviders() {
+    try {
+      const providers = await this.providerRepository.find();
+      return providers;
+    } catch (error) {
+      this.handleError.LogError(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} provider`;
+  // find one provider
+  async findOneProvider(id: number) {
+    const user = await this.providerRepository.findOneBy({ id_provider: id });
+    if (!user) throw new NotFoundException('Provider not found');
+
+    return user;
   }
 
-  update(id: number, updateProviderDto: any) {
-    return `This action updates a #${id} provider`;
+  // update provider
+  async updateProvider(id: number, updateProviderDto: UpdateProviderDto) {
+    const user = await this.providerRepository.preload({
+      id_provider: id,
+      ...updateProviderDto,
+    });
+
+    if (!user) throw new NotFoundException('Provider not found');
+
+    try {
+      await this.providerRepository.save(user);
+      return user;
+    } catch (error) {
+      this.handleError.LogError(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} provider`;
+  // delete provider
+  async removeProvider(id: number) {
+    const user = await this.findOneProvider(id);
+    try {
+      await this.providerRepository.remove(user);
+      return true;
+    } catch (error) {
+      this.handleError.LogError(error);
+    }
   }
 }

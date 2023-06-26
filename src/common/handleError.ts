@@ -10,9 +10,12 @@ export class HandleError {
     console.log(error);
     this.logger.log(error);
 
-    if (error.code === '23502') {
-      throw new BadRequestException(error.detail);
+    if ((error.code === '23502', error.code === '22007')) {
+      throw new BadRequestException(
+        error.detail === 'undefined' ? error.detail : this.logger.log(error),
+      );
     }
+
     throw new InternalServerErrorException(error.detail);
   }
 }

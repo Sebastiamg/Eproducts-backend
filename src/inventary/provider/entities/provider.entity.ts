@@ -6,7 +6,7 @@ export class Provider {
   @PrimaryGeneratedColumn()
   id_provider: number;
 
-  @Column()
+  @Column({ unique: true })
   name_provider: string;
 
   @Column()
@@ -15,8 +15,8 @@ export class Provider {
   @Column()
   telephone: string;
 
-  //Relations
-  //Input
+  // Relations
+  // Input
   @OneToMany(() => Input, (input) => input.provider)
   inputs: Input[];
 }

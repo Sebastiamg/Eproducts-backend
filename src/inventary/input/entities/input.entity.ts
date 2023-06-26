@@ -1,12 +1,15 @@
 import {
   Column,
   Entity,
+  JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { InputDetails } from './input-details.entity';
+
 import { Provider } from '../../provider/entities/provider.entity';
+import { InputDetails } from './input-details.entity';
 
 @Entity()
 export class Input {
@@ -16,17 +19,23 @@ export class Input {
   @Column()
   input_number: number;
 
-  // @Column()
-  // input_details: string;
+  @Column()
+  input_details: string;
 
   @Column()
   date: Date;
 
-  //Relations
-  //Input Details
-  @OneToMany(() => InputDetails, (inputDetails) => inputDetails.input)
-  input_details: InputDetails[];
+  // Relations
+  // Product - input details
+  @OneToMany(() => InputDetails, (InputDetails) => InputDetails.input, {
+    eager: true,
+  })
+  Input_details: InputDetails[];
 
-  @ManyToOne(() => Provider, (provider) => provider.inputs)
+  // provider
+  @ManyToOne(() => Provider, (provider) => provider.inputs, {
+    eager: true,
+  })
+  @JoinColumn()
   provider: Provider;
 }

@@ -10,7 +10,7 @@ import { CaterogyService } from '../caterogy/category.service';
 
 @Injectable()
 export class ProductService {
-  private errorLog = new HandleError();
+  public errorLog = new HandleError();
   private mior: MiOrModule = MiOrModule;
 
   constructor(
@@ -41,7 +41,7 @@ export class ProductService {
       return await this.productRepository.find({
         take: limit,
         skip: offset,
-        relations: ['category', 'outputs', 'inputDetails'],
+        relations: ['category', 'outputs', 'input_details'],
       });
     } catch (error) {
       this.errorLog.LogError(error);

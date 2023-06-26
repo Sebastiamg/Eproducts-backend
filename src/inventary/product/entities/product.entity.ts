@@ -2,10 +2,13 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Input } from 'src/inventary/input/entities';
 import { Category } from '../../caterogy/entities/category.entity';
 import { Output } from '../../output/entities/output.entity';
 import { InputDetails } from '../../input/entities/input-details.entity';
@@ -51,7 +54,9 @@ export class Product {
   })
   outputs: Output[];
 
-  //Input Details
-  @OneToMany(() => InputDetails, (inputDetails) => inputDetails.product)
-  inputDetails: InputDetails[];
+  //Input - Input Details
+  @OneToMany(() => InputDetails, (InputDetails) => InputDetails.product, {
+    eager: true,
+  })
+  input_details: InputDetails[];
 }

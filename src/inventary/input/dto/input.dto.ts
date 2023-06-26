@@ -1,4 +1,5 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class InputDto {
   // id_input: number;
@@ -11,8 +12,12 @@ export class InputDto {
   input_details: string;
 
   @IsNotEmpty()
-  @IsDate()
-  date: Date;
+  @IsString()
+  date: string;
 
-  // id_provider: number;
+  @IsNumber()
+  @IsOptional()
+  id_provider: number;
 }
+
+export class UpdateInputDto extends PartialType(InputDto) {}
