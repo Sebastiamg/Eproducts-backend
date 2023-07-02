@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './admin/admin.module';
 import { DataBaseSourceConfig } from './config/db.source';
 import { InventaryModule } from './inventary/inventary.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { InventaryModule } from './inventary/inventary.module';
     TypeOrmModule.forRoot(DataBaseSourceConfig),
     InventaryModule,
     AdminModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
